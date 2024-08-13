@@ -1,113 +1,88 @@
-import Image from "next/image";
+"use client";
+
+import { MdLightMode } from "react-icons/md";
+import { PiMoonFill } from "react-icons/pi";
+import { CiLinkedin } from "react-icons/ci";
+import { IoLogoGithub } from "react-icons/io5";
+
+import Link from "next/link";
+import Image from 'next/image';
+import ProjectsSection from '../components/ProjectsSection';
+import { useState } from 'react';
 
 export default function Home() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    document.documentElement.classList.toggle('dark');
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className={`flex flex-col min-h-[100dvh] bg-background text-foreground dark:bg-gray-800 dark:text-white`}>
+      <header className={`px-4 lg:px-6 w-4/5 mx-auto h-12 sm:h-14 flex items-center mt-5 border-2 border-black dark:border-gray-200`}>
+        <Link href="#" className="flex items-center justify-center">
+          <span className="font-bold text-xl sm:text-3xl">SC</span>
+        </Link>
+        <nav className="ml-auto flex gap-2 sm:gap-4">
+          <button onClick={toggleDarkMode} className="text-sm font-medium hover:text-muted-foreground transition-colors">
+            {isDarkMode ? <MdLightMode className="w-6 h-6 sm:w-7 sm:h-7" /> : <PiMoonFill className="w-6 h-6 sm:w-7 sm:h-7" />}
+          </button>
+        </nav>
+      </header>
+      <main className="flex-1">
+        <section className="w-full py-8 sm:py-12 md:py-16 lg:py-24">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center lg:flex-row lg:justify-center lg:items-center space-y-6 lg:space-y-0 lg:space-x-16">
+              <div className="flex flex-col items-center space-y-4">
+                <div className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 overflow-hidden rounded-xl bg-gray-200 relative">
+                  <Image 
+                    src="/headshot.jpg" 
+                    alt="Steven Chen" 
+                    fill 
+                    sizes="(max-width: 640px) 192px, (max-width: 1024px) 224px, 256px" 
+                    style={{ objectFit: 'cover' }} 
+                    priority
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col justify-center items-center lg:items-start space-y-4">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter bg-clip-text text-black dark:text-white text-center lg:text-left">
+                  Steven Chen
+                </h1>
+                <p className="max-w-[500px] text-sm sm:text-base md:text-lg text-black text-center lg:text-left dark:text-gray-300">
+                  A computer science student at UIUC.
+                </p>
+                <div className="flex justify-center lg:justify-start w-full items-center space-x-4">
+                  <Link
+                    href="#projects"
+                    className="inline-flex h-10 items-center justify-center rounded-md bg-black text-white px-6 text-sm font-medium shadow transition-colors hover:bg-gray-800 dark:bg-white dark:text-black"
+                  >
+                    View Works
+                  </Link>
+                  <Link href="https://www.linkedin.com/in/chensteven2077/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium hover:text-gray-200 transition-colors">
+                    <CiLinkedin className="w-6 h-6 sm:w-8 sm:h-8" />
+                  </Link>
+                  <Link href="https://github.com/Chen-Steve" target="_blank" rel="noopener noreferrer" className="text-sm font-medium hover:text-gray-200 transition-colors">
+                    <IoLogoGithub className="w-6 h-6 sm:w-8 sm:h-8" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <hr className="w-4/5 mx-auto mt-16 sm:mt-24 md:mt-32 lg:mt-40 mb-16 sm:mb-20 md:mb-24 lg:mb-30 border-t border-black dark:border-white" />
+
+        <ProjectsSection />
+      </main>
+      <footer className="py-4 sm:py-6">
+        <div className="container px-4 md:px-6">
+          <p className="text-center text-xs sm:text-sm text-gray-500 dark:text-gray-300">
+            © 2024 Steven Chen. All rights reserved.
+          </p>
         </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      </footer>
+    </div>
   );
 }
