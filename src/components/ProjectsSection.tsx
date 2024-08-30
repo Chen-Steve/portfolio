@@ -65,6 +65,11 @@ const ProjectsSection: React.FC = () => {
       title: "Particle Simulator",
       description: "A comprehensive 2D/3D particle simulator with diverse particle types and interactions.",
       link: "https://github.com/Chen-Steve/particle-life-main"
+    },
+    {
+      title: "Coup Online",
+      description: "An online version of the board game Coup!",
+      link: "https://couponline-eight.vercel.app/"
     }
   ];
 

@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <div className={`flex flex-col min-h-[100dvh] bg-background text-foreground dark:bg-gray-800 dark:text-white`}>
-      <header className={`px-4 lg:px-6 w-4/5 mx-auto h-12 sm:h-14 flex items-center mt-5 border-2 border-black dark:border-gray-200`}>
+      <header className={`px-4 lg:px-6 w-4/5 mx-auto h-12 sm:h-14 flex items-center mt-5`}>
         <Link href="#" className="flex items-center justify-center">
           <span className="font-bold text-xl sm:text-3xl">SC</span>
         </Link>
