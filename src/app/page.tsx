@@ -7,12 +7,15 @@ import { IoLogoGithub } from "react-icons/io5";
 
 import Link from "next/link";
 import Image from 'next/image';
-import ProjectsSection from '../components/ProjectsSection';
+import ProjectsSection from '../components/project-section';
 import { useState, useEffect } from 'react';
 import { initCursor, updateCursor } from 'ipad-cursor';
+import ResumeModal from '../components/resume-modal';
+import { Link as ScrollLink } from "react-scroll";
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -67,25 +70,34 @@ export default function Home() {
               </div>
               <div className="flex flex-col justify-center items-center lg:items-start space-y-4">
                 <h1 
-                  className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter bg-clip-text text-black dark:text-white text-left w-full"
+                  className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter bg-clip-text text-black dark:text-white text-center lg:text-left w-full"
                   data-cursor="text"
                 >
                   Steven Chen
                 </h1>
                 <p 
-                  className="max-w-[500px] text-sm sm:text-base md:text-lg text-black text-left dark:text-gray-300"
+                  className="max-w-[500px] text-md sm:text-md md:text-lg text-black text-left dark:text-gray-300"
                   data-cursor="text"
                 >
                   A computer science student at UIUC.
                 </p>
+                <ScrollLink 
+                  to="projects-section" 
+                  smooth={true} 
+                  duration={500} 
+                  className="text-sm sm:text-base text-black dark:text-gray-300 underline"
+                  data-cursor="block"
+                >
+                  My projects
+                </ScrollLink>
                 <div className="flex justify-center lg:justify-start w-full items-center space-x-2">
-                  <Link
-                    href="#projects"
+                  <button
+                    onClick={() => setIsResumeModalOpen(true)}
                     className="inline-flex h-10 items-center justify-center rounded-md bg-black text-white px-6 text-sm font-medium shadow transition-colors hover:bg-gray-800 dark:bg-white dark:text-black"
                     data-cursor="block"
                   >
-                    View Works
-                  </Link>
+                    Resume
+                  </button>
                   <Link 
                     href="https://www.linkedin.com/in/chensteven2077/" 
                     target="_blank" 
@@ -112,7 +124,9 @@ export default function Home() {
         
         <hr className="w-4/5 mx-auto mt-16 sm:mt-24 md:mt-32 lg:mt-40 mb-16 sm:mb-20 md:mb-24 lg:mb-30 border-t border-black dark:border-white" />
 
-        <ProjectsSection />
+        <div id="projects-section">
+          <ProjectsSection />
+        </div>
       </main>
       <footer className="py-4 sm:py-6" data-cursor="text">
         <div className="container px-4 md:px-6">
@@ -121,6 +135,7 @@ export default function Home() {
           </p>
         </div>
       </footer>
+      <ResumeModal isOpen={isResumeModalOpen} onClose={() => setIsResumeModalOpen(false)} />
     </div>
   );
 }

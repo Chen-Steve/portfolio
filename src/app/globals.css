@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+@import 'react-pdf/dist/esm/Page/TextLayer.css';
+
 @layer base {
   :root {
     --background: #F8F7F6;
@@ -68,8 +71,37 @@
   }
 }
 
-/* Add this to ensure the cursor is visible */
 .ipad-cursor {
   pointer-events: none !important;
   z-index: 9999 !important;
+}
+
+.block-icon {
+  position: relative;
+  display: inline-flex;
+}
+
+.icon-tag {
+  position: absolute;
+  top: 2%;
+  right: 21%;
+  z-index: 1;
+  width: 30px !important;
+  height: 30px !important;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 20%;
+  border: 2px solid #000000;
+  padding: 4px;
+  margin: 8px;
+}
+
+.icon-tag:hover {
+  background-color: rgba(220, 220, 220, 0.9);
+}
+
+@media (max-width: 640px) {
+  .icon-tag {
+    top: 5%;
+    right: 5%;
+  }
 }
