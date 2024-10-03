@@ -1,74 +1,53 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react';
-import { updateCursor } from 'ipad-cursor';
-import Image from 'next/image';
-import { FiDownload } from 'react-icons/fi';
-import '../app/globals.css';
+import React, { useEffect } from 'react';
+
 interface ResumeModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
-  const modalRef = useRef<HTMLDivElement>(null);
-
+const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleEscKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose();
       }
     };
 
-    const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        onClose();
-      }
-    };
-
     if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-      document.addEventListener('mousedown', handleClickOutside);
-      updateCursor();
+      document.addEventListener('keydown', handleEscKey);
     }
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscKey);
     };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
-  const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = '/resume.pdf'; // Ensure this path is correct
-    link.download = 'resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  const resumeUrl = "https://docs.google.com/document/d/1xmIMqafP0Zle2uJodoeWG2I6RN4yubo4GjkKqW9GLK0/edit";
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div ref={modalRef} className="block-icon">
-        <Image
-          src="/resume.png"
-          alt="Resume"
-          width={1000}
-          height={1000}
-          onClick={onClose}
-          priority
-          className="max-w-[90vw] max-h-[90vh] object-contain"
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={onClose}>
+      <div className="bg-white p-4 rounded-lg w-11/12 h-5/6 max-w-4xl" onClick={e => e.stopPropagation()}>
+        <div className="flex justify-between items-center mb-4">
+          <button
+            onClick={onClose}
+            className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded"
+            data-cursor="block"
+          >
+            Close
+          </button>
+        </div>
+        <iframe 
+          src={resumeUrl}
+          className="w-full h-[calc(100%-4rem)]"
+          title="My Resume"
         />
-        <button
-          onClick={handleDownload}
-          className="icon-tag dark:bg-white dark:hover:bg-gray-200"
-          aria-label="Download resume"
-        >
-          <FiDownload className="w-full h-full text-black" />
-        </button>
       </div>
     </div>
   );
-}
+};
+
+export default ResumeModal;

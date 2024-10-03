@@ -41,7 +41,6 @@ const Modal: React.FC<{ project: Project; onClose: () => void }> = ({ project, o
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={onClose}>
       <div className="bg-white p-4 rounded-lg max-w-3xl w-full" onClick={e => e.stopPropagation()}>
-        <h2 className="text-2xl font-bold mb-4">{project.title}</h2>
         <div className="w-full h-96 relative mb-4">
           {isParticleSimulator ? (
             <video
@@ -61,21 +60,16 @@ const Modal: React.FC<{ project: Project; onClose: () => void }> = ({ project, o
             />
           )}
         </div>
-        <p className="mb-4" data-cursor="text">{project.description}</p>
-        <Link
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 hover:underline"
-        >
-        </Link>
-        <button
-          onClick={onClose}
-          className="ml-0 bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded"
-          data-cursor="block"
-        >
-          Esc
-        </button>
+        <div className="flex justify-between items-center">
+          <p className="flex-grow mr-4" data-cursor="text">{project.description}</p>
+          <button
+            onClick={onClose}
+            className="bg-gray-200 hover:bg-gray-300 text-md px-2 py-1 rounded"
+            data-cursor="block"
+          >
+            Esc
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -131,17 +125,17 @@ const ProjectsSection: React.FC = () => {
   const projects: Project[] = [
     {
       title: "Kard",
-      description: "A better Quizlet Alternative with a better UI, and more features.",
+      description: "A fullstack CRUD flashcard study app; nextjs, supabase, typescript, tailwindcss.",
       link: "https://kard.space/",
     },
     {
       title: "Particle Simulator",
-      description: "A comprehensive 2D/3D particle simulator with diverse particle types and interactions.",
+      description: "A comprehensive 2D/3D particle simulator with diverse particle types and interactions. Entirely in JS/HTML.",
       link: "https://github.com/Chen-Steve/particle-life",
     },
     {
       title: "Coup Online",
-      description: "An online version of the board game Coup!",
+      description: "An online version of the board game Coup! Built with Nextjs & Convex.",
       link: "https://couponline-eight.vercel.app/",
     }
   ];

@@ -93,10 +93,11 @@
   border: 2px solid #000000;
   padding: 4px;
   margin: 8px;
+  transition: background-color 0.3s ease;
 }
 
 .icon-tag:hover {
-  background-color: rgba(220, 220, 220, 0.9);
+  background-color: rgba(180, 180, 180, 0.9);
 }
 
 @media (max-width: 640px) {

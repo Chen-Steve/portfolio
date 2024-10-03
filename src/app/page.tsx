@@ -79,7 +79,7 @@ export default function Home() {
                   className="max-w-[500px] text-md sm:text-md md:text-lg text-black text-left dark:text-gray-300"
                   data-cursor="text"
                 >
-                  A computer science student at UIUC.
+                  Computer Science and Statistics at UIUC.
                 </p>
                 <ScrollLink 
                   to="projects-section" 
@@ -93,7 +93,7 @@ export default function Home() {
                 <div className="flex justify-center lg:justify-start w-full items-center space-x-2">
                   <button
                     onClick={() => setIsResumeModalOpen(true)}
-                    className="inline-flex h-10 items-center justify-center rounded-md bg-black text-white px-6 text-sm font-medium shadow transition-colors hover:bg-gray-800 dark:bg-white dark:text-black"
+                    className="inline-flex h-10 items-center justify-center rounded-md bg-black text-white px-4 text-lg font-medium shadow transition-colors hover:bg-gray-800 dark:bg-white dark:text-black"
                     data-cursor="block"
                   >
                     Resume
