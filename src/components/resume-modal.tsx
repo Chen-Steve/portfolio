@@ -35,7 +35,6 @@ const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
           <button
             onClick={onClose}
             className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded"
-            data-cursor="block"
           >
             Close
           </button>

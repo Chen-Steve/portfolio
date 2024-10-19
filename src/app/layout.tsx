@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ClientLayout from './ClientLayout';
+import CustomCursor from '@/components/CustomCursor';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,10 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ClientLayout>
+        <div className="flex flex-col min-h-[100dvh] bg-[#F8F7F6] text-foreground dark:bg-gray-800 dark:text-white">
           {children}
-        </ClientLayout>
+        </div>
         <ToastContainer />
+        <CustomCursor />
       </body>
     </html>
   );

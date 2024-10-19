@@ -9,7 +9,6 @@ import Link from "next/link";
 import Image from 'next/image';
 import ProjectsSection from '../components/project-section';
 import { useState, useEffect } from 'react';
-import { initCursor, updateCursor } from 'ipad-cursor';
 import ResumeModal from '../components/resume-modal';
 import { Link as ScrollLink } from "react-scroll";
 
@@ -22,32 +21,11 @@ export default function Home() {
     document.documentElement.classList.toggle('dark');
   };
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      initCursor({
-        normalStyle: { 
-          background: 'rgba(255, 255, 255, 0.3)',
-          border: '2px solid black'
-        },
-        textStyle: { 
-          background: 'rgba(255, 255, 255, 0.5)',
-          border: '2px solid black'
-        },
-        blockStyle: { 
-          background: 'rgba(255, 255, 255, 0.2)',
-          radius: 'auto',
-          border: '2px solid black'
-        },
-      });
-      updateCursor();
-    }
-  }, []);
-
   return (
     <div className="flex flex-col min-h-[100dvh] bg-[#F8F7F6] text-foreground dark:bg-gray-800 dark:text-white">
       <header className="px-4 lg:px-6 w-4/5 mx-auto h-12 sm:h-14 flex items-center mt-5">
         <nav className="ml-auto flex gap-2 sm:gap-4">
-          <button onClick={toggleDarkMode} className="text-sm font-medium hover:text-muted-foreground transition-colors" data-cursor="block">
+          <button onClick={toggleDarkMode} className="text-sm font-medium hover:text-muted-foreground transition-colors">
             {isDarkMode ? <MdLightMode className="w-6 h-6 sm:w-7 sm:h-7" /> : <PiMoonFill className="w-6 h-6 sm:w-7 sm:h-7" />}
           </button>
         </nav>
@@ -57,7 +35,7 @@ export default function Home() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center lg:flex-row lg:justify-center lg:items-center space-y-6 lg:space-y-0 lg:space-x-16">
               <div className="flex flex-col items-center space-y-4">
-                <div className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 overflow-hidden rounded-xl bg-gray-200 relative" data-cursor="block">
+                <div className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 overflow-hidden rounded-xl bg-gray-200 relative">
                   <Image 
                     src="/headshot.jpg" 
                     alt="Steven Chen" 
@@ -86,7 +64,7 @@ export default function Home() {
                   smooth={true} 
                   duration={500} 
                   className="text-sm sm:text-base text-black dark:text-gray-300 underline"
-                  data-cursor="block"
+
                 >
                   My projects
                 </ScrollLink>
@@ -94,7 +72,7 @@ export default function Home() {
                   <button
                     onClick={() => setIsResumeModalOpen(true)}
                     className="inline-flex h-10 items-center justify-center rounded-md bg-black text-white px-4 text-lg font-medium shadow transition-colors hover:bg-gray-800 dark:bg-white dark:text-black"
-                    data-cursor="block"
+
                   >
                     Resume
                   </button>
@@ -103,18 +81,16 @@ export default function Home() {
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="p-1 rounded-full transition-colors group" 
-                    data-cursor="linkedin"
                   >
-                    <CiLinkedin className="w-6 h-6 sm:w-7 sm:h-7 text-black dark:text-white" data-cursor="block"/>
+                    <CiLinkedin className="w-6 h-6 sm:w-7 sm:h-7 text-black dark:text-white" />
                   </Link>
                   <Link 
                     href="https://github.com/Chen-Steve" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="p-1 rounded-full transition-colors group" 
-                    data-cursor="github"
                   >
-                    <IoLogoGithub className="w-6 h-6 sm:w-7 sm:h-7 text-black dark:text-white" data-cursor="block" />
+                    <IoLogoGithub className="w-6 h-6 sm:w-7 sm:h-7 text-black dark:text-white" />
                   </Link>
                 </div>
               </div>

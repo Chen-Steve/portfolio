@@ -2,12 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { updateCursor } from 'ipad-cursor';
 import { IoLogoGithub } from "react-icons/io5";
-import { LuGlobe2 } from "react-icons/lu";
+import { LuGlobe2, LuBookOpen } from "react-icons/lu";
 import Image from 'next/image';
+import Tooltip from './Tooltip';
 
 interface Project {
   title: string;
@@ -17,6 +17,7 @@ interface Project {
 
 interface ProjectCardProps {
   project: Project;
+  onClick: () => void;
 }
 
 const Modal: React.FC<{ project: Project; onClose: () => void }> = ({ project, onClose }) => {
@@ -31,7 +32,6 @@ const Modal: React.FC<{ project: Project; onClose: () => void }> = ({ project, o
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    updateCursor();
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
@@ -65,7 +65,6 @@ const Modal: React.FC<{ project: Project; onClose: () => void }> = ({ project, o
           <button
             onClick={onClose}
             className="bg-gray-200 hover:bg-gray-300 text-md px-2 py-1 rounded"
-            data-cursor="block"
           >
             Esc
           </button>
@@ -75,28 +74,43 @@ const Modal: React.FC<{ project: Project; onClose: () => void }> = ({ project, o
   );
 };
 
-const ProjectCard: React.FC<ProjectCardProps & { onClick: () => void }> = ({ project, onClick }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
   const isWebsiteProject = project.title === "Kard" || project.title === "Coup Online";
   const isParticleSimulator = project.title === "Particle Simulator";
+  const isKardProject = project.title === "Kard";
 
   const imageName = project.title.toLowerCase().replace(/\s+/g, '-');
 
   return (
     <div className="flex flex-col cursor-pointer" onClick={onClick}>
       <div className="flex justify-between items-center mb-2">
-        <h3 className="text-base sm:text-lg font-semibold text-black dark:text-white">{project.title}</h3>
-        <Link
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors p-2"
-          data-cursor="block"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {isWebsiteProject ? <LuGlobe2 className="w-5 h-5" /> : <IoLogoGithub className="w-5 h-5" />}
-        </Link>
+        <h3 className="text-base sm:text-lg font-semibold text-black dark:text-white" data-cursor="text">{project.title}</h3>
+        <div className="flex space-x-2">
+          {isKardProject && (
+            <Tooltip content="Blog">
+              <Link
+                href="/blog"
+                className="text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors p-2"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <LuBookOpen className="w-5 h-5" />
+              </Link>
+            </Tooltip>
+          )}
+          <Tooltip content={isWebsiteProject ? "Website" : "GitHub"}>
+            <Link
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors p-2"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {isWebsiteProject ? <LuGlobe2 className="w-5 h-5" /> : <IoLogoGithub className="w-5 h-5" />}
+            </Link>
+          </Tooltip>
+        </div>
       </div>
-      <div className="bg-background rounded-lg overflow-hidden border-2 border-dotted border-gray-300 dark:border-gray-600 w-full h-48 relative cursor-default" data-cursor="block">
+      <div className="bg-background rounded-lg overflow-hidden border-2 border-dotted border-gray-300 dark:border-gray-600 w-full h-48 relative cursor-default">
         {isParticleSimulator ? (
           <video
             src="/particle-simulator.mp4"
@@ -139,10 +153,6 @@ const ProjectsSection: React.FC = () => {
       link: "https://couponline-eight.vercel.app/",
     }
   ];
-
-  useEffect(() => {
-    updateCursor();
-  }, [selectedProject]);
 
   return (
     <section id="projects" className="w-full py-8 sm:py-12 md:py-16 lg:py-24 bg-background dark:bg-gray-800">
