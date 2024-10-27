@@ -29,7 +29,7 @@ export default function Home() {
             <h1 className="text-2xl sm:text-xl md:text-2xl tracking-tighter text-black dark:text-white whitespace-nowrap">
               Steven Chen
             </h1>
-            <div className="h-px flex-1 mr-2 bg-black dark:bg-white" />
+            <div className="h-px flex-1 mr-4 ml-4 bg-black dark:bg-white" />
           </div>
           <nav className="flex gap-1 sm:gap-2 md:gap-2 items-center">
             <Link 
@@ -102,7 +102,7 @@ export default function Home() {
           </div>
         </section>
         
-        <hr className="w-2/4 mx-auto mt-16 sm:mt-24 md:mt-32 lg:mt-40 mb-16 sm:mb-20 md:mb-24 lg:mb-30 border-t border-black dark:border-white" />
+        <hr className="w-2/4 mx-auto mt-16 sm:mt-24 md:mt-32 lg:mt-40 mb-16 sm:mb-20 md:mb-24 lg:mb-30 border-t border-2 border-black dark:border-white" />
 
         <div id="projects-section">
           <ProjectsSection />
