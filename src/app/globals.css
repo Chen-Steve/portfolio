@@ -32,6 +32,7 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    --font-family: 'YourFontName', sans-serif;
   }
 
   .dark {
@@ -68,6 +69,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-family);
   }
 }
 
@@ -100,95 +102,6 @@
     top: 5%;
     right: 5%;
   }
-}
-
-/* Custom cursor styles */
-.custom-cursor {
-  width: 20px;
-  height: 20px;
-  border: 2px solid black;
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-/* Ensure the default cursor is hidden */
-* {
-  cursor: none !important;
-}
-
-/* Hide cursor on specific interactive elements */
-a, button, input[type="submit"], input[type="button"], [role="button"],
-input[type="text"], input[type="password"], input[type="email"],
-input[type="number"], input[type="tel"], input[type="url"],
-textarea, select {
-  cursor: none !important;
-}
-
-/* Hide cursor on pseudo-elements */
-*::before,
-*::after {
-  cursor: none !important;
-}
-
-/* Hide cursor in text selection */
-::selection {
-  cursor: none !important;
-}
-
-/* Hide cursor in contenteditable elements */
-[contenteditable="true"] {
-  cursor: none !important;
-}
-
-/* Hide cursor in iframe contents */
-iframe {
-  pointer-events: none;
-}
-
-/* Ensure cursor remains hidden during drag operations */
-* {
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  user-drag: none;
-}
-
-/* Disable text selection to prevent cursor change */
-* {
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Re-enable text selection for specific elements */
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="number"],
-input[type="tel"],
-input[type="url"],
-textarea {
-  -webkit-user-select: text;
-  -khtml-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-}
-
-/* Allow text selection on text elements */
-p, h1, h2, h3, h4, h5, h6, span, a, input, textarea {
-  cursor: none !important;
-  -webkit-user-select: text;
-  -khtml-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
 }
 
 /* Style for selected text */
