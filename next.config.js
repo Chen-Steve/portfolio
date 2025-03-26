@@ -5,9 +5,6 @@ const nextConfig = {
     config.resolve.alias.encoding = false;
     return config;
   },
-  experimental: {
-    esmExternals: 'loose',
-  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
