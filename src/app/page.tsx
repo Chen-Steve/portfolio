@@ -56,7 +56,7 @@ export default function Home() {
                   Computer Science and Statistics at UIUC.
                 </p>
                 <p className="text-lg text-center lg:text-left">
-                  I like building with Python, React/TypeScript and PostgreSQL.
+                  I like building with Python, React/TypeScript and C/C++.
                 </p>
                 <div className="flex gap-6">
                   <button 
