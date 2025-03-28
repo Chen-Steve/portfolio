@@ -13,8 +13,7 @@
     "next": "15.2.3",
     "postcss": "^8.4.41",
     "react": "^18",
-    "react-dom": "^18",
-    "react-pdf": "^9.1.0"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",
