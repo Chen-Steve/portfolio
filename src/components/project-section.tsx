@@ -52,8 +52,8 @@ const Modal: React.FC<{ project: Project; onClose: () => void }> = ({ project, o
             <Image
               src={`/${imageName}.png`}
               alt={`${project.title} preview`}
-              layout="fill"
-              objectFit="contain"
+              fill
+              className="object-contain"
             />
           )}
         </div>
@@ -107,8 +107,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
           <Image
             src={`/${imageName}.png`}
             alt={`${project.title} preview`}
-            layout="fill"
-            objectFit="cover"
+            fill
+            className="object-cover"
           />
         )}
       </div>
