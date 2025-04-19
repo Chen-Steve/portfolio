@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from 'next/image';
 import ProjectsSection from '../components/project-section';
 import ResumeButton from '../components/resume-button';
 import ProjectsButton from '../components/projects-button';
@@ -17,13 +16,10 @@ export default function Home() {
           <section className="py-20 flex items-center justify-center">
             <div className="flex flex-col lg:flex-row items-start justify-center gap-8 lg:gap-12">
               <div className="w-48 h-48 lg:w-56 lg:h-56 overflow-hidden rounded-xl bg-gray-200 relative shrink-0 self-center lg:self-start">
-                <Image 
+                <img 
                   src="/headshot.jpg" 
                   alt="Steven Chen" 
-                  fill 
-                  sizes="(max-width: 1024px) 192px, 224px" 
-                  style={{ objectFit: 'cover' }} 
-                  priority
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="flex flex-col items-center lg:items-start gap-4 max-w-lg self-center lg:self-start">

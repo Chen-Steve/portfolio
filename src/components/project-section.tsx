@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Globe, GithubLogo } from "@phosphor-icons/react";
-import Image from 'next/image';
 import Tooltip from './Tooltip';
 
 interface Project {
@@ -49,11 +48,10 @@ const Modal: React.FC<{ project: Project; onClose: () => void }> = ({ project, o
               className="w-full h-full object-contain"
             />
           ) : (
-            <Image
+            <img
               src={`/${imageName}.png`}
               alt={`${project.title} preview`}
-              fill
-              className="object-contain"
+              className="w-full h-full object-contain"
             />
           )}
         </div>
@@ -104,11 +102,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
             className="w-full h-full object-cover"
           />
         ) : (
-          <Image
+          <img
             src={`/${imageName}.png`}
             alt={`${project.title} preview`}
-            fill
-            className="object-cover"
+            className="w-full h-full object-cover"
           />
         )}
       </div>
