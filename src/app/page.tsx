@@ -1,42 +1,17 @@
-"use client";
-
-import { LinkedinLogo, GithubLogo } from "@phosphor-icons/react";
 import Link from "next/link";
 import Image from 'next/image';
 import ProjectsSection from '../components/project-section';
-import { useState } from 'react';
-import ResumeModal from '../components/resume-modal';
+import ResumeButton from '../components/resume-button';
+import ProjectsButton from '../components/projects-button';
+import HeaderSection from '../components/header-section';
 
 export default function Home() {
-  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
-
+  const currentYear = new Date().getFullYear();
+  
   return (
     <div className="min-h-screen bg-[#F8F7F6] flex flex-col">
       <div className="w-11/12 md:w-3/5 mx-auto">
-        <header className="h-14 flex items-center justify-between mt-5">
-          <div className="flex items-center gap-4">
-            <h1 className="text-2xl tracking-tighter">Steven Chen</h1>
-            <div className="h-px flex-1 bg-black hidden md:block" />
-          </div>
-          <nav className="flex gap-8">
-            <Link 
-              href="https://www.linkedin.com/in/chensteven2077/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:opacity-80 transition-opacity"
-            >
-              <LinkedinLogo className="w-8 h-8" weight="light" />
-            </Link>
-            <Link 
-              href="https://github.com/Chen-Steve" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:opacity-80 transition-opacity"
-            >
-              <GithubLogo className="w-8 h-8" weight="light" />
-            </Link>
-          </nav>
-        </header>
+        <HeaderSection />
 
         <main className="flex-1">
           <section className="py-20 flex items-center justify-center">
@@ -59,22 +34,8 @@ export default function Home() {
                   I like building with Python, React/TypeScript and C/C++.
                 </p>
                 <div className="flex gap-6">
-                  <button 
-                    onClick={() => {
-                      document.getElementById('projects-section')?.scrollIntoView({ 
-                        behavior: 'smooth'
-                      });
-                    }}
-                    className="text-sm underline hover:opacity-80 transition-opacity"
-                  >
-                    My projects
-                  </button>
-                  <button
-                    onClick={() => setIsResumeModalOpen(true)}
-                    className="text-sm underline hover:opacity-80 transition-opacity"
-                  >
-                    Resume
-                  </button>
+                  <ProjectsButton />
+                  <ResumeButton />
                 </div>
               </div>
             </div>
@@ -89,12 +50,10 @@ export default function Home() {
 
         <footer className="py-6">
           <p className="text-sm text-gray-500 text-center">
-            © {new Date().getFullYear()} Steven Chen. All rights reserved.
+            © {currentYear} Steven Chen. All rights reserved.
           </p>
         </footer>
       </div>
-
-      <ResumeModal isOpen={isResumeModalOpen} onClose={() => setIsResumeModalOpen(false)} />
     </div>
   );
 }
