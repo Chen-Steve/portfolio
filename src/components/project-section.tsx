@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { Globe, GithubLogo } from "@phosphor-icons/react";
+import { Globe, GithubLogo, DownloadSimple } from "@phosphor-icons/react";
 import Tooltip from './Tooltip';
 
 interface Project {
@@ -13,72 +13,20 @@ interface Project {
 
 interface ProjectCardProps {
   project: Project;
-  onClick: () => void;
 }
 
-const Modal: React.FC<{ project: Project; onClose: () => void }> = ({ project, onClose }) => {
-  const isParticleSimulator = project.title === "Particle Simulator";
-  const imageName = project.title.toLowerCase().replace(/\s+/g, '-');
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [onClose]);
-
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={onClose}>
-      <div className="bg-white p-4 rounded-lg max-w-3xl w-full" onClick={e => e.stopPropagation()}>
-        <div className="w-full h-96 relative mb-4">
-          {isParticleSimulator ? (
-            <video
-              src="/particle-simulator.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-contain"
-            />
-          ) : (
-            <img
-              src={`/${imageName}.png`}
-              alt={`${project.title} preview`}
-              className="w-full h-full object-contain"
-            />
-          )}
-        </div>
-        <div className="flex justify-between items-center">
-          <p className="flex-grow mr-4">{project.description}</p>
-          <button
-            onClick={onClose}
-            className="bg-gray-200 hover:bg-gray-300 text-md px-2 py-1 rounded"
-          >
-            Esc
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const isWebsite = project.link.startsWith('http') && !project.link.includes('github.com');
+  const isDesktopApp = project.title === "LanryEditor";
   const imageName = project.title.toLowerCase().replace(/\s+/g, '-');
+  const projectPath = `/projects/${imageName}`;
 
   return (
-    <div className="flex flex-col cursor-pointer" onClick={onClick}>
-      <div className="flex justify-between items-center mb-2">
+    <div className="group relative">
+      <div className="flex justify-between items-center">
         <h3 className="text-base sm:text-lg font-semibold text-black">{project.title}</h3>
         <div className="flex space-x-2">
-          <Tooltip content={isWebsite ? "Website" : "GitHub"}>
+          <Tooltip content={isDesktopApp ? "Download" : isWebsite ? "Website" : "GitHub"}>
             <Link
               href={project.link}
               target="_blank"
@@ -86,36 +34,44 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
               className="text-black hover:text-gray-600 transition-colors p-2"
               onClick={(e) => e.stopPropagation()}
             >
-              {isWebsite ? <Globe className="w-5 h-5" weight="regular" /> : <GithubLogo className="w-5 h-5" weight="regular" />}
+              {isDesktopApp ? (
+                <DownloadSimple className="w-5 h-5" weight="regular" />
+              ) : isWebsite ? (
+                <Globe className="w-5 h-5" weight="regular" />
+              ) : (
+                <GithubLogo className="w-5 h-5" weight="regular" />
+              )}
             </Link>
           </Tooltip>
         </div>
       </div>
-      <div className="bg-background rounded-lg overflow-hidden border-2 border-dotted border-gray-300 w-full h-48 relative cursor-default">
-        {project.title === "Particle Simulator" ? (
-          <video
-            src="/particle-simulator.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <img
-            src={`/${imageName}.png`}
-            alt={`${project.title} preview`}
-            className="w-full h-full object-cover"
-          />
-        )}
-      </div>
+
+      <Link href={projectPath} className="block">
+        <div className="bg-background rounded-lg overflow-hidden border-2 border-dotted border-gray-300 w-full h-48 relative -mt-2">
+          {project.title === "Particle Simulator" ? (
+            <video
+              src="/particle-simulator.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <img
+              src={`/${imageName}.png`}
+              alt={`${project.title} preview`}
+              className="w-full h-full object-cover"
+            />
+          )}
+          <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-200" />
+        </div>
+      </Link>
     </div>
   );
 };
 
 const ProjectsSection: React.FC = () => {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
   const projects: Project[] = [
     {
       title: "Kard",
@@ -131,6 +87,11 @@ const ProjectsSection: React.FC = () => {
       title: "Lanry",
       description: "A Light Novel website for translators and readers",
       link: "https://lanry.space/",
+    },
+    {
+      title: "LanryEditor",
+      description: "A desktop rich text editor built with C/C++, designed specifically for writing and publishing light novels with advanced formatting capabilities.",
+      link: "https://drive.google.com/drive/folders/14fye756TVzFQPolcVzqn_NEvfoRimYxH?usp=sharing",
     }
   ];
 
@@ -143,17 +104,10 @@ const ProjectsSection: React.FC = () => {
             <ProjectCard
               key={index}
               project={project}
-              onClick={() => setSelectedProject(project)}
             />
           ))}
         </div>
       </div>
-      {selectedProject && (
-        <Modal
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
     </section>
   );
 };
