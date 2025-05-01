@@ -42,7 +42,7 @@ export default function ParticleSimulatorPage() {
         </div>
 
         <div className="space-y-8">
-          <div className="bg-white p-6 rounded-xl shadow-sm">
+          <div className="bg-white p-6">
             <h2 className="text-2xl font-semibold mb-4">Overview</h2>
             <p className="text-gray-700">
               A comprehensive particle simulation system that demonstrates emergent behavior through simple rules 
@@ -51,7 +51,7 @@ export default function ParticleSimulatorPage() {
             </p>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm">
+          <div className="bg-white p-6">
             <h2 className="text-2xl font-semibold mb-4">Built with</h2>
             <ul className="grid grid-cols-2 gap-3">
               <li className="flex items-center bg-gray-50 p-3 rounded-lg">
@@ -75,7 +75,7 @@ export default function ParticleSimulatorPage() {
             </ul>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm">
+          <div className="bg-white p-6">
             <h2 className="text-2xl font-semibold mb-4">Key Features</h2>
             <ul className="space-y-2">
               <li className="flex items-start">
