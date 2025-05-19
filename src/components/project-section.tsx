@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Globe, GithubLogo, DownloadSimple } from "@phosphor-icons/react";
+import { Globe, GithubLogo } from "@phosphor-icons/react";
 import Tooltip from './Tooltip';
 
 interface Project {
@@ -17,37 +17,36 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const isWebsite = project.link.startsWith('http') && !project.link.includes('github.com');
-  const isDesktopApp = project.title === "LanryEditor";
   const imageName = project.title.toLowerCase().replace(/\s+/g, '-');
   const projectPath = `/projects/${imageName}`;
 
   return (
-    <div className="group relative">
-      <div className="flex justify-between items-center">
+    <div className="group relative flex flex-col">
+      <div className="flex justify-between items-center h-10">
         <h3 className="text-base sm:text-lg font-semibold text-black">{project.title}</h3>
-        <div className="flex space-x-2">
-          <Tooltip content={isDesktopApp ? "Download" : isWebsite ? "Website" : "GitHub"}>
-            <Link
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-black hover:text-gray-600 transition-colors p-2"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {isDesktopApp ? (
-                <DownloadSimple className="w-5 h-5" weight="regular" />
-              ) : isWebsite ? (
-                <Globe className="w-5 h-5" weight="regular" />
-              ) : (
-                <GithubLogo className="w-5 h-5" weight="regular" />
-              )}
-            </Link>
-          </Tooltip>
+        <div className="flex space-x-2 min-w-[40px] justify-end">
+          {project.link && (
+            <Tooltip content={isWebsite ? "Website" : "GitHub"}>
+              <Link
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-black hover:text-gray-600 transition-colors p-2"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {isWebsite ? (
+                  <Globe className="w-5 h-5" weight="regular" />
+                ) : (
+                  <GithubLogo className="w-5 h-5" weight="regular" />
+                )}
+              </Link>
+            </Tooltip>
+          )}
         </div>
       </div>
 
-      <Link href={projectPath} className="block">
-        <div className="bg-background rounded-lg overflow-hidden border-2 border-dotted border-gray-300 w-full h-48 relative -mt-2">
+      <Link href={projectPath} className="block mt-2">
+        <div className="bg-background rounded-lg overflow-hidden border-2 border-dotted border-gray-300 w-full h-48 relative">
           {project.title === "Particle Simulator" ? (
             <video
               src="/particle-simulator.mp4"
@@ -91,7 +90,7 @@ const ProjectsSection: React.FC = () => {
     {
       title: "LanryEditor",
       description: "A desktop rich text editor built with C/C++, designed specifically for writing and publishing light novels with advanced formatting capabilities.",
-      link: "https://drive.google.com/drive/folders/14fye756TVzFQPolcVzqn_NEvfoRimYxH?usp=sharing",
+      link: "",
     }
   ];
 

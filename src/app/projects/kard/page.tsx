@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Globe } from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeft, Globe, GithubLogo } from "@phosphor-icons/react/dist/ssr";
 
 export default function KardPage() {
   return (
@@ -26,7 +26,7 @@ export default function KardPage() {
           />
         </div>
 
-        <div className="mb-8">
+        <div className="mb-8 flex gap-4">
           <Link
             href="https://kard.space/"
             target="_blank"
@@ -34,64 +34,25 @@ export default function KardPage() {
             className="inline-flex items-center text-black hover:text-gray-600 bg-white px-4 py-2 rounded-lg border-2 border-black transition-all hover:shadow-md"
           >
             <Globe className="w-5 h-5 mr-2" />
-            Visit Website
+            Website
+          </Link>
+          <Link
+            href="https://github.com/Chen-Steve/Kard"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-black hover:text-gray-600 bg-white px-4 py-2 rounded-lg border-2 border-black transition-all hover:shadow-md"
+          >
+            <GithubLogo className="w-5 h-5 mr-2" />
+            Source
           </Link>
         </div>
 
-        <div className="space-y-8">
-          <div className="bg-white p-6">
-            <h2 className="text-2xl font-semibold mb-4">Overview</h2>
+        <div className="">
             <p className="text-gray-700">
-              Kard is a full-stack flashcard website. It&apos;s meant to be a free alternative to quizlet.
+              Kard is a full-stack flashcard website. It&apos;s a a free alternative to quizlet. (Deprecated for now)
             </p>
-          </div>
-
-          <div className="bg-white p-6">
-            <h2 className="text-2xl font-semibold mb-4">Built with</h2>
-            <ul className="grid grid-cols-2 gap-3">
-              <li className="flex items-center bg-gray-50 p-3 rounded-lg">
-                <span className="font-medium">Next.js</span>
-              </li>
-              <li className="flex items-center bg-gray-50 p-3 rounded-lg">
-                <span className="font-medium">TypeScript</span>
-              </li>
-              <li className="flex items-center bg-gray-50 p-3 rounded-lg">
-                <span className="font-medium">Supabase</span>
-              </li>
-              <li className="flex items-center bg-gray-50 p-3 rounded-lg">
-                <span className="font-medium">Tailwind CSS</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="bg-white p-6">
-            <h2 className="text-2xl font-semibold mb-4">Key Features</h2>
-            <ul className="space-y-2">
-              <li className="flex items-start">
-                <span className="inline-block w-2 h-2 mt-2 mr-2 bg-black rounded-full"></span>
-                <span>Create and manage flashcard decks</span>
-              </li>
-              <li className="flex items-start">
-                <span className="inline-block w-2 h-2 mt-2 mr-2 bg-black rounded-full"></span>
-                <span>Spaced repetition learning system</span>
-              </li>
-              <li className="flex items-start">
-                <span className="inline-block w-2 h-2 mt-2 mr-2 bg-black rounded-full"></span>
-                <span>Progress tracking and statistics</span>
-              </li>
-              <li className="flex items-start">
-                <span className="inline-block w-2 h-2 mt-2 mr-2 bg-black rounded-full"></span>
-                <span>Responsive design for all devices</span>
-              </li>
-              <li className="flex items-start">
-                <span className="inline-block w-2 h-2 mt-2 mr-2 bg-black rounded-full"></span>
-                <span>Real-time synchronization</span>
-              </li>
-            </ul>
-          </div>
-
-          
         </div>
+        
       </div>
     </main>
   );

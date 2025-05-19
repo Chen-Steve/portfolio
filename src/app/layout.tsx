@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={reiswar.className}>
+      <body className={reiswar.className} suppressHydrationWarning>
         {children}
       </body>
     </html>
